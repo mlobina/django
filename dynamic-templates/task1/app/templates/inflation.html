@@ -1,4 +1,6 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>
+{% load static %}
+{% load color_filter %}
 <html>
   <head>
     <meta charset="UTF-8">
@@ -18,8 +20,28 @@
         <h1 class="col s12">Инфляция в России</h1>
         <div class="col s12 m8">
         
-        <!-- Ваша логика -->
+        <table>
+          <tr>
+          {% for header in headers %}
+            <th>{{header}}</th>
+          {% endfor %}
+          </tr>
 
+          {% for row in inflation_list %}
+              <tr>
+              <td>{{row.year}}</td>
+              {% for month in row.months %}
+                  {% if month %}
+                      <td bgcolor="{{ month|color }}">{{month}}</td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+            {% endfor %}
+            <td bgcolor="#808080">{{ row.total }}</td>
+            </tr>
+        {% endfor %}
+
+        </table>
         </div>
       </div>
     {% endblock %}
