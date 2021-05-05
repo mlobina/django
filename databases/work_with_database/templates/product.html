@@ -3,12 +3,28 @@
 
 {% block title %}Телефон{% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="header">
-            <h1>Телефон</h1>
+    {% for phone in phones %}
+        <div class="container">
+            <div class="header">
+                <h1><a href="{% url 'catalog' %}{{ phone.slug }}">{{ phone.name }}</a></h1>
+            </div>
+            <div class="content">
+                <b>Стоимость {{ phone.price }}</b>
+                <br>
+                <img src="{{ phone.image }}">
+                {% if phone.slug in request.path %}
+                    <p>дата релиза: {{ phone.release_date }}
+                        <br>
+                            {% if phone.lte_exists == True %}
+                                LTE: да
+                            {% else %}
+                                LTE: нет
+                            {% endif %}
+                        <br>
+                    <h5><a href="{% url 'catalog' %}">Назад в каталог</a></h5>
+                    </p>
+                {% endif %}
+            </div>
         </div>
-        <div class="content">
-
-        </div>
-    </div>
+    {% endfor %}
 {% endblock %}

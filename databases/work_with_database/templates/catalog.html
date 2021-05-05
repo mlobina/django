@@ -10,10 +10,16 @@
 
         <div class="sort-block">
             {# Здесь должен быть раздел с сортировкой #}
+            <h6>Сортировать по:
+                <a href="{% url 'catalog' %}?sort=name">названию</a>
+                <a href="{% url 'catalog' %}?sort=min_price">начиная с дешёвых</a>
+                <a href="{% url 'catalog' %}?sort=max_price">начиная с дорогих</a>
+            </h6>
         </div>
 
         <div class="content">
             {# Здесь должен отображаться каталог с телефонами #}
+            {% include "product.html" %}
         </div>
     </div>
 {% endblock %}
